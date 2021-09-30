@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ChOx分析🤣🤣🤣🤣  | Gridea</title>
-<link rel="shortcut icon" href="https://shxiaj.github.io/favicon.ico?v=1632981413022">
+<link rel="shortcut icon" href="https://shxiaj.github.io/favicon.ico?v=1632981558577">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://shxiaj.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="ChOx分析🤣🤣🤣🤣  | Gridea - Atom Feed" href="https://shxiaj.github.io/atom.xml">
@@ -25,7 +25,7 @@ echo 0 | gmx trjconv -s md.tpr -f md.trr -o md.x..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://shxiaj.github.io">
-  <img class="avatar" src="https://shxiaj.github.io/images/avatar.png?v=1632981413022" alt="">
+  <img class="avatar" src="https://shxiaj.github.io/images/avatar.png?v=1632981558577" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -120,7 +120,7 @@ measure center $mcid weight mass
 脚本内容：附录</p>
 <h5 id="3-vmd-中画偶极">3. VMD 中画偶极</h5>
 <p>使用脚本输出的vmd命令直接画</p>
-<pre><code class="language-tcl">display resetview
+<pre><code>display resetview
 rotate x by -90
 rotate y by -90
 source {E:\Notes\Script\VMD\color.tcl}
@@ -132,12 +132,12 @@ draw cone {56.475 62.396 17.579} {58.058 65.282 14.511} radius 1.5 resolution 20
 </code></pre>
 <h5 id="4-vmd-保存图片">4. VMD 保存图片</h5>
 <p>调整一下视角，背景白色，二级结构，设置好工作目录，渲染保存</p>
-<pre><code class="language-tcl">render Tachyon vmdscene.dat
+<pre><code>render Tachyon vmdscene.dat
 tachyon_WIN32.exe vmdscene.dat -aasamples 24 -format BMP -o dipole.bmp -mediumshade -trans_vmd -res 2560 1440 -numthreads 4
 </code></pre>
 <p>tachyon_WIN32.exe我自己已经写到环境变量，可直接调用</p>
 <h3 id="附vmd初始化脚本vmdrc">附vmd初始化脚本：vmd.rc</h3>
-<pre><code class="language-tcl">####################  My Settings  #################
+<pre><code>####################  My Settings  #################
 display projection orthographic
 
 proc bw {} {color Display Background white}
