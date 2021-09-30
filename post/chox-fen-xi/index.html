@@ -1,98 +1,92 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<meta charset="utf-8" >
+
 <title>ChOx分析🤣🤣🤣🤣  | Gridea</title>
-<link rel="shortcut icon" href="https://shxiaj.github.io/favicon.ico?v=1632981558577">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://shxiaj.github.io/favicon.ico?v=1632981975109">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://shxiaj.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="ChOx分析🤣🤣🤣🤣  | Gridea - Atom Feed" href="https://shxiaj.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="ChOx分析🤣🤣🤣🤣
-一、处理trr轨迹文件
-防止蛋白质分子裂开，帧总数为1/3，提取最后一帧gro文件
-# -skip 间隔帧数输出
-echo 0 | gmx trjconv -s md.tpr -f md.trr -o md.x..." />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://shxiaj.github.io">
-  <img class="avatar" src="https://shxiaj.github.io/images/avatar.png?v=1632981558577" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://shxiaj.github.io">
+        <img class="avatar" src="https://shxiaj.github.io/images/avatar.png?v=1632981975109" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://shxiaj.github.io">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              ChOx分析🤣🤣🤣🤣 
-            </h2>
-            <div class="post-info">
-              <span>
-                2021-09-30
-              </span>
-              <span>
-                7 min read
-              </span>
-              
-            </div>
+          
+          <h2 class="post-title">ChOx分析🤣🤣🤣🤣 </h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2021-09-30</span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h2 id="chox分析">ChOx分析🤣🤣🤣🤣</h2>
+          </div>
+          <div class="post-content">
+            <h2 id="chox分析">ChOx分析🤣🤣🤣🤣</h2>
 <h3 id="一-处理trr轨迹文件">一、处理trr轨迹文件</h3>
 <p>防止蛋白质分子裂开，帧总数为1/3，提取最后一帧gro文件</p>
 <pre><code class="language-bash"># -skip 间隔帧数输出
@@ -264,99 +258,57 @@ echo -e &quot;draw cone {${f_dip[6]} ${f_dip[7]} ${f_dip[8]}} {${f_dip[9]} ${f_d
 # fun4 &gt; md_dipoles.gro
 </code></pre>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#chox%E5%88%86%E6%9E%90">ChOx分析🤣🤣🤣🤣</a>
-<ul>
-<li><a href="#%E4%B8%80-%E5%A4%84%E7%90%86trr%E8%BD%A8%E8%BF%B9%E6%96%87%E4%BB%B6">一、处理trr轨迹文件</a></li>
-<li><a href="#%E4%BA%8C-xtc%E4%B8%AD%E5%AF%BC%E5%87%BAdipoles">二、xtc中导出dipoles</a></li>
-<li><a href="#%E4%B8%89-vmd%E7%94%BB%E5%81%B6%E6%9E%81">三、VMD画偶极</a><br>
-*
-<ul>
-<li><a href="#1-%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%88%86%E5%AD%90%E8%B4%A8%E5%BF%83%E5%9D%90%E6%A0%87">1. 蛋白质分子质心坐标</a></li>
-<li><a href="#2-%E7%9B%B4%E6%8E%A5%E7%94%A8%E8%84%9A%E6%9C%AC%E7%94%BB%E7%BC%A9%E6%94%BE%E7%9B%AE%E6%A0%87%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%B0%83%E6%95%B4%E6%96%87%E4%BB%B6%E5%90%8Ddipolessh">2. 直接用脚本画，缩放目标可能需要调整，文件名：dipoles.sh</a></li>
-<li><a href="#3-vmd-%E4%B8%AD%E7%94%BB%E5%81%B6%E6%9E%81">3. VMD 中画偶极</a></li>
-<li><a href="#4-vmd-%E4%BF%9D%E5%AD%98%E5%9B%BE%E7%89%87">4. VMD 保存图片</a></li>
-</ul>
-</li>
-<li><a href="#%E9%99%84vmd%E5%88%9D%E5%A7%8B%E5%8C%96%E8%84%9A%E6%9C%ACvmdrc">附vmd初始化脚本：vmd.rc</a></li>
-<li><a href="#%E9%99%84script-dipolessh">附Script:  dipoles.sh</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
           <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://shxiaj.github.io/post/hello-gridea/">
+            <a class="purple-link" href="https://shxiaj.github.io/post/hello-gridea/">
               <h3 class="post-title">
-                Hello Gridea
+                下一篇：Hello Gridea
               </h3>
             </a>
           </div>
-        
+          
+      </div>
 
-        
+      
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://shxiaj.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://shxiaj.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-      </div>
+
     </div>
+    <script type="application/javascript">
 
-    <script>
-      hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
+</script>
 
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
 
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
 
-    </script>
+
   </body>
 </html>
