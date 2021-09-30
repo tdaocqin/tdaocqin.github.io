@@ -1,0 +1,362 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ChOx分析🤣🤣🤣🤣  | Gridea</title>
+<link rel="shortcut icon" href="https://shxiaj.github.io/favicon.ico?v=1632981243652">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://shxiaj.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="ChOx分析🤣🤣🤣🤣  | Gridea - Atom Feed" href="https://shxiaj.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="ChOx分析🤣🤣🤣🤣
+一、处理trr轨迹文件
+防止蛋白质分子裂开，帧总数为1/3，提取最后一帧gro文件
+# -skip 间隔帧数输出
+echo 0 | gmx trjconv -s md.tpr -f md.trr -o md.x..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://shxiaj.github.io">
+  <img class="avatar" src="https://shxiaj.github.io/images/avatar.png?v=1632981243652" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              ChOx分析🤣🤣🤣🤣 
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-09-30
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="chox分析">ChOx分析🤣🤣🤣🤣</h2>
+<h3 id="一-处理trr轨迹文件">一、处理trr轨迹文件</h3>
+<p>防止蛋白质分子裂开，帧总数为1/3，提取最后一帧gro文件</p>
+<pre><code class="language-bash"># -skip 间隔帧数输出
+echo 0 | gmx trjconv -s md.tpr -f md.trr -o md.xtc -pbc mol -ur compact -skip 3
+# 提取最后一帧，不带水分子
+echo 20 | gmx trjconv -s md.tpr -f md.xtc -o md.gro -dump 300000
+</code></pre>
+<h3 id="二-xtc中导出dipoles">二、xtc中导出dipoles</h3>
+<pre><code class="language-bash"># 建立索引，将蛋白质、FAD索引合并，否则分子不完整
+echo -e &quot;1 | 13\nq\n&quot; | gmx make_ndx -f ../ions.gro
+# gmx dipoles计算静电偶极、是物理意义上的
+echo 28 | gmx dipoles -s *.tpr -f *.xtc -n
+# 计算偶极与Z轴的夹角的余弦值，写入dipoles
+awk '!/^(#|@)/ {theta = $4 / $5; print $1 &quot;     &quot; theta}' Mtot.xvg &gt; dipoles
+</code></pre>
+<h3 id="三-vmd画偶极">三、VMD画偶极</h3>
+<h5 id="1-蛋白质分子质心坐标">1. 蛋白质分子质心坐标</h5>
+<p>打开md.gro， 蛋白质居中（自定义命令pc）见附录</p>
+<pre><code class="language-bash">## VMD获取质心坐标， mass_center_x     mass_center_y     mass_center_z
+set mcid [atomselect 0 &quot;protein or resname FAD&quot;]
+measure center $mcid weight mass
+</code></pre>
+<h5 id="2-直接用脚本画缩放目标可能需要调整文件名dipolessh">2. 直接用脚本画，缩放目标可能需要调整，文件名：dipoles.sh</h5>
+<p>用法./dipoles.sh     mass_center_x     mass_center_y     mass_center_z<br>
+脚本内容：附录</p>
+<h5 id="3-vmd-中画偶极">3. VMD 中画偶极</h5>
+<p>使用脚本输出的vmd命令直接画</p>
+<pre><code class="language-tcl">display resetview
+rotate x by -90
+rotate y by -90
+source {E:\Notes\Script\VMD\color.tcl}
+draw delete all
+draw color purple
+# 下面两条命令替换成脚本得到的
+draw cylinder {41.048 34.253 47.490} {56.475 62.396 17.579} radius 0.5 filled yes resolution 20
+draw cone {56.475 62.396 17.579} {58.058 65.282 14.511} radius 1.5 resolution 20
+</code></pre>
+<h5 id="4-vmd-保存图片">4. VMD 保存图片</h5>
+<p>调整一下视角，背景白色，二级结构，设置好工作目录，渲染保存</p>
+<pre><code class="language-tcl">render Tachyon vmdscene.dat
+tachyon_WIN32.exe vmdscene.dat -aasamples 24 -format BMP -o dipole.bmp -mediumshade -trans_vmd -res 2560 1440 -numthreads 4
+</code></pre>
+<p>tachyon_WIN32.exe我自己已经写到环境变量，可直接调用</p>
+<h3 id="附vmd初始化脚本vmdrc">附vmd初始化脚本：vmd.rc</h3>
+<pre><code class="language-tcl">####################  My Settings  #################
+display projection orthographic
+
+proc bw {} {color Display Background white}
+proc bb {} {color Display Background black}
+proc bx {} {pbc box}
+
+proc sam {} {
+    display resetview
+    rotate x by -90
+    rotate y by -90
+
+
+    mol delrep 0 0
+
+    mol modcolor 0 0 Structure
+    mol modstyle 0 0 NewCartoon 0.300000 10.000000 4.100000 0
+    mol color Structure
+    mol representation NewCartoon 0.300000 10.000000 4.100000 0
+    mol selection not water
+    mol material Opaque
+    mol addrep 0
+
+    mol modselect 1 0 {resname SAM SBM SEM SDM}
+    mol color Name
+    mol representation Lines 1.000000
+    mol selection {resname SAM SBM SEM SDM}
+    mol material Opaque
+    mol addrep 0
+}
+
+proc pc {} {
+  pbc wrap -center com -centersel &quot;protein&quot; -compound residue -all
+}
+</code></pre>
+<h3 id="附script-dipolessh">附Script:  dipoles.sh</h3>
+<pre><code class="language-bash"># Usage: 需要Mtot.xvg、 md.gro (都为最后一帧)
+# Author: Ding
+#########################################################
+
+function fun1 {
+  # 获取偶极xyz分量
+  awk 'END {printf(&quot;%15.3f%15.3f%15.3f\n&quot;,$2,$3,$4)}' Mtot.xvg
+}
+
+function fun2 {
+  # md.gro 最后一行的残基编号和原子总数
+  awk 'BEGIN {FIELDWIDTHS=&quot;5 3 7 5&quot;} \
+       {a=aa;b=bb;aa=$1;bb=$4;} END {print a &quot; &quot; b}' md.gro
+}
+
+function fun3 {
+  # 缩放的坐标，质心、偶极、尖尖
+  awk 'BEGIN {
+       mx = &quot;'$mx'&quot; / 10 ; my = &quot;'${my}'&quot; / 10; mz = &quot;'${mz}'&quot; / 10;
+       dx = &quot;'${dip[0]}'&quot;; dy = &quot;'${dip[1]}'&quot;; dz = &quot;'${dip[2]}'&quot;;
+       s = 3; t = 8;
+       for (i = 1; i &lt; 200; ++i) {
+            dxi=dx/i; dyi=dy/i; dzi=dz/i;
+            if (-s &lt; dxi &amp;&amp; dxi &lt; s &amp;&amp; -s &lt; dyi &amp;&amp; dyi &lt; s &amp;&amp; -s &lt; dzi &amp;&amp; dzi &lt; s) break;
+       }
+       x2=mx+dxi; y2=my+dyi; z2=mz+dzi;
+       x3=mx+dx/(0.9*i); y3=my+dy/(0.9*i); z3=mz+dz/(0.9*i);
+       printf(&quot;%8.3f%8.3f%8.3f\n&quot;,x2,y2,z2);
+       printf(&quot;%8.3f%8.3f%8.3f\n&quot;,mx*10,my*10,mz*10);
+       printf(&quot;%8.3f%8.3f%8.3f\n&quot;,x2*10,y2*10,z2*10);
+       printf(&quot;%8.3f%8.3f%8.3f\n&quot;,x3*10,y3*10,z3*10);
+       printf(&quot;%5d\n&quot;,i)
+     }'
+}
+
+function fun4 {
+  # 缩放后坐标写入md.gro，一个质心一个偶极箭头点
+  # echo $1 $2 $3
+  awk 'BEGIN {FIELDWIDTHS=&quot;5 3 7 5 8 8 8&quot;; 
+       num = &quot;'${atom_num[1]}'&quot;;rid = &quot;'${atom_num[0]}'&quot;;
+       x1 = &quot;'$mx'&quot; / 10 ; y1 = &quot;'${my}'&quot; / 10; z1 = &quot;'${mz}'&quot; / 10;
+       x2 = &quot;'${f_dip[0]}'&quot;;y2 = &quot;'${f_dip[1]}'&quot;;z2 = &quot;'${f_dip[2]}'&quot;}
+       {if (NR == 2) print $1+2; else print $0 ; if (NR == num + 2){
+        printf(&quot;%5d%3s%7s%5d%8.3f%8.3f%8.3f\n&quot;, rid+1,&quot;LOG&quot;,&quot;CA&quot;,num+1,x1,y1,z1);
+        printf(&quot;%5d%3s%7s%5d%8.3f%8.3f%8.3f\n&quot;, rid+1,&quot;LOG&quot;,&quot;CA&quot;,num+2,x2,y2,z2)
+       }}' md.gro
+}
+
+function fun5 {
+  # 计算静电偶级与Z轴的夹角Cos theta值
+  awk '!/^(#|@)/ {theta = $4 / $5; print $0 &quot;     &quot; theta}' Mtot.xvg &gt; dipoles
+}
+
+#########################################################
+       # printf(&quot;%8.3f%8.3f%8.3f\n&quot;,mx,my,mz);
+       # printf(&quot;%8.3f%8.3f%8.3f\n&quot;,dx,dy,dz);
+# fun4 
+# echo ${atom_num[@]}
+# echo ${f_dip[@]}
+
+# atomselect 0 &quot;protein or resname FAD&quot;
+# measure center atomselect0 weight mass
+#########################################################
+
+### mass center's coordinate (units A) ###
+mx=$1; my=$2; mz=$3
+
+
+### diploes_coordinate ###
+dip=($(fun1))
+echo -e &quot;\n偶极分量: ${dip[@]}&quot;
+
+
+### atom_numbers ###
+atom_num=($(fun2))
+echo -e &quot;残基编号&amp;原子总数: ${atom_num[@]}&quot;
+
+
+### log_atom_coordinate ###
+f_dip=($(fun3))
+echo -e &quot;蛋白质心坐标(A): ${f_dip[3]} ${f_dip[4]} ${f_dip[5]}&quot;
+echo -e &quot;缩放偶极坐标(A): ${f_dip[6]} ${f_dip[7]} ${f_dip[8]}&quot;
+echo -e &quot;偶极尖尖坐标(A): ${f_dip[9]} ${f_dip[10]} ${f_dip[11]}&quot;
+echo -e &quot;缩放次数: ${f_dip[12]}&quot;
+echo -e &quot;draw cylinder {${f_dip[3]} ${f_dip[4]} ${f_dip[5]}} {${f_dip[6]} ${f_dip[7]} ${f_dip[8]}} radius 0.5 filled yes resolution 20&quot;
+echo -e &quot;draw cone {${f_dip[6]} ${f_dip[7]} ${f_dip[8]}} {${f_dip[9]} ${f_dip[10]} ${f_dip[11]}} radius 1.5 resolution 20&quot;
+
+### write in gro ###
+# fun4 &gt; md_dipoles.gro
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#chox%E5%88%86%E6%9E%90">ChOx分析🤣🤣🤣🤣</a>
+<ul>
+<li><a href="#%E4%B8%80-%E5%A4%84%E7%90%86trr%E8%BD%A8%E8%BF%B9%E6%96%87%E4%BB%B6">一、处理trr轨迹文件</a></li>
+<li><a href="#%E4%BA%8C-xtc%E4%B8%AD%E5%AF%BC%E5%87%BAdipoles">二、xtc中导出dipoles</a></li>
+<li><a href="#%E4%B8%89-vmd%E7%94%BB%E5%81%B6%E6%9E%81">三、VMD画偶极</a><br>
+*
+<ul>
+<li><a href="#1-%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%88%86%E5%AD%90%E8%B4%A8%E5%BF%83%E5%9D%90%E6%A0%87">1. 蛋白质分子质心坐标</a></li>
+<li><a href="#2-%E7%9B%B4%E6%8E%A5%E7%94%A8%E8%84%9A%E6%9C%AC%E7%94%BB%E7%BC%A9%E6%94%BE%E7%9B%AE%E6%A0%87%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%B0%83%E6%95%B4%E6%96%87%E4%BB%B6%E5%90%8Ddipolessh">2. 直接用脚本画，缩放目标可能需要调整，文件名：dipoles.sh</a></li>
+<li><a href="#3-vmd-%E4%B8%AD%E7%94%BB%E5%81%B6%E6%9E%81">3. VMD 中画偶极</a></li>
+<li><a href="#4-vmd-%E4%BF%9D%E5%AD%98%E5%9B%BE%E7%89%87">4. VMD 保存图片</a></li>
+</ul>
+</li>
+<li><a href="#%E9%99%84vmd%E5%88%9D%E5%A7%8B%E5%8C%96%E8%84%9A%E6%9C%ACvmdrc">附vmd初始化脚本：vmd.rc</a></li>
+<li><a href="#%E9%99%84script-dipolessh">附Script:  dipoles.sh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://shxiaj.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://shxiaj.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
