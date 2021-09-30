@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://shxiaj.github.io</id>
-    <title>Gridea</title>
-    <updated>2021-09-30T06:06:47.144Z</updated>
+    <title>ShXiaJ</title>
+    <updated>2021-09-30T06:20:30.173Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://shxiaj.github.io"/>
     <link rel="self" href="https://shxiaj.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://shxiaj.github.io/images/avatar.png</logo>
     <icon>https://shxiaj.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Gridea</rights>
+    <rights>All rights reserved 2021, ShXiaJ</rights>
     <entry>
         <title type="html"><![CDATA[ChOx分析🤣🤣🤣🤣 ]]></title>
         <id>https://shxiaj.github.io/post/chox-fen-xi/</id>
