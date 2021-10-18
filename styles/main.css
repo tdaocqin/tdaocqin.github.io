@@ -2069,10 +2069,10 @@ pre > span.copy-code:hover {
   font-weight: bold;
 }
 body {
-      background-color: #eee;
+      background-color: #ced4da;
     }
     .nav-toggle .line {
-      background-color: #eee !important;
+      background-color: #ced4da !important;
     }.header {
         width: 1200px;
         margin: 0 auto;
@@ -2186,7 +2186,7 @@ body {
       color: #fc6423;
       border-bottom-color: #fc6423;
     }.bg-color {
-      background-color: #f1f3f5fe;
+      background-color: #fffffffe;
     }
       .site-meta {
         background: #1c7ed6 !important;
