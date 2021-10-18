@@ -2082,7 +2082,13 @@ body {
         width: 1200px;
         margin: 0 auto;
       }
-    
+    @font-face {
+      font-family: 'SourceCodePro-Regular';
+      src: url('/media/fonts/SourceCodePro-Regular.ttf');
+    }
+    * {
+        font-family: 'SourceCodePro-Regular';
+    }
     .post-body {
       font-size: 16px !important
     }
@@ -2180,16 +2186,16 @@ body {
       color: #fc6423;
       border-bottom-color: #fc6423;
     }.bg-color {
-      background-color: #fffffffe;
+      background-color: #f1f3f5fe;
     }
       .site-meta {
-        background: #000 !important;
+        background: #1c7ed6 !important;
       }
       .head-top-line {
-        background: #000 !important;
+        background: #1c7ed6 !important;
       }
     .brand {
-      background: #000000fe;
+      background: #1c7ed6fe;
     }
     .main-title, .brand {
       color: #FFF !important;
