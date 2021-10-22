@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://shxiaj.github.io</id>
     <title>ShXiaJ</title>
-    <updated>2021-10-18T05:28:11.300Z</updated>
+    <updated>2021-10-22T01:36:53.967Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://shxiaj.github.io"/>
     <link rel="self" href="https://shxiaj.github.io/atom.xml"/>
@@ -187,6 +187,37 @@ echo -e &quot;draw cone {${f_dip[6]} ${f_dip[7]} ${f_dip[8]}} {${f_dip[9]} ${f_d
 ### write in gro ###
 # fun4 &gt; md_dipoles.gro
 </code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Shell笔记]]></title>
+        <id>https://shxiaj.github.io/post/shell-bi-ji/</id>
+        <link href="https://shxiaj.github.io/post/shell-bi-ji/">
+        </link>
+        <updated>2021-07-08T05:40:28.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1">1</h3>
+<p>标题</p>
+<figure data-type="image" tabindex="1"><img src="https://shxiaj.github.io/post-images/runoob-logo.png" alt="RUNOOB 图标" title="呼呼" loading="lazy"></figure>
+<pre><code>![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png &quot;RUNOOB&quot;)
+</code></pre>
+<pre><code class="language-tex">$$
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0 \\
+\end{vmatrix}
+${$tep1}{\style{visibility:hidden}{(x+1)(x+1)}}
+$$
+</code></pre>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;$&#039; in math mode at position 248: …
+\end{vmatrix}
+$̲{$tep1}{\style{…'>\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0 \\
+\end{vmatrix}
+${$tep1}{\style{visibility:hidden}{(x+1)(x+1)}}
+</p>
 ]]></content>
     </entry>
 </feed>
